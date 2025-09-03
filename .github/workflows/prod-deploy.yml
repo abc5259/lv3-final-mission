@@ -65,6 +65,6 @@ jobs:
           sudo docker run \
             --name monster-server-prod \
             --restart unless-stopped \
-            -p 8080:8080 \
+            -p 80:8080 \
             -e PROFILE=prod \
             -d ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server-prod:latest
