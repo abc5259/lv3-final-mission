@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${db.dev.host}:${db.dev.port}/${db.dev.name}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${db.dev.username}
+    password: ${db.dev.password}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+security:
+  jwt:
+    token:
+      secret-key: ${jwt.local.secret-key}
+      expire-duration: ${jwt.local.expire-duration}

@@ -13,13 +13,11 @@ import finalmission.domain.Member;
 import finalmission.domain.MemberRepository;
 import finalmission.domain.MonsterEnergy;
 import finalmission.domain.MonsterEnergyStock;
-import finalmission.domain.MonsterEnergyStockRepository;
 import finalmission.domain.Refrigerator;
 import finalmission.domain.RefrigeratorRepository;
 import finalmission.domain.Reservation;
 import finalmission.domain.ReservationRepository;
 import finalmission.domain.Role;
-import jakarta.persistence.EntityManager;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +31,10 @@ class ReservationServiceTest extends AbstractServiceIntegrationTest {
     private ReservationRepository reservationRepository;
 
     @Autowired
-    private MonsterEnergyStockRepository monsterEnergyStockRepository;
-
-    @Autowired
     private RefrigeratorRepository refrigeratorRepository;
+
     @Autowired
     private MemberRepository memberRepository;
-
-    @Autowired
-    private EntityManager entityManager;
 
     @Test
     void 특정_몬스터_에너지_드링크를_예약할_수_있다() {

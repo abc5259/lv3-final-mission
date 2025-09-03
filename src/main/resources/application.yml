@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  tomcat:
+    mbean-registry:
+      enabled: true
+
+spring:
+  profiles:
+    default: local
+
+  config:
+    import:
+      - secret.yml
+
+randommer:
+  api-key: ${randommers.apikey}
+  base-url: https://randommer.io/api/Name
