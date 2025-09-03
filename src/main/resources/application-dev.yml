@@ -6,7 +6,7 @@ spring:
     password: ${db.dev.password}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
 
 security:
   jwt:
