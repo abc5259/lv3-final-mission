@@ -15,3 +15,21 @@ spring:
 randommer:
   api-key: ${randommers.apikey}
   base-url: https://randommer.io/api/Name
+
+management:
+  metrics:
+    enable:
+      all: false
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+    jmx:
+      exposure:
+        exclude: '*'
+  health:
+    db:
+      enabled: false
+    mail:
+      enabled: false
