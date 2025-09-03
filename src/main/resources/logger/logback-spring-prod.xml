@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <property name="LOG_FILE_PATH" value="/app/logs"/>
+
+    <include resource="logger/file/file-info-appender.xml"/>
+    <include resource="logger/file/file-warn-appender.xml"/>
+    <include resource="logger/file/file-error-appender.xml"/>
+    <include resource="logger/cloudwatch/cloudwatch-info-appender.xml"/>
+    <include resource="logger/cloudwatch/cloudwatch-warn-appender.xml"/>
+    <include resource="logger/cloudwatch/cloudwatch-error-appender.xml"/>
+
+    <root level="INFO">
+        <appender-ref ref="file-info-appender"/>
+        <appender-ref ref="file-warn-appender"/>
+        <appender-ref ref="file-error-appender"/>
+        <appender-ref ref="cloudwatch-info-appender"/>
+        <appender-ref ref="cloudwatch-warn-appender"/>
+        <appender-ref ref="cloudwatch-error-appender"/>
+    </root>
+</included>
