@@ -1,4 +1,4 @@
-name: Deploy To EC2 gogo
+name: Deploy To EC2 gogogo
 
 on:
   push:
