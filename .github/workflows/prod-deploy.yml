@@ -3,7 +3,7 @@ name: Deploy To EC2 gogo
 on:
   push:
     branches:
-      - dev
+      - abc5259
 
 jobs:
   setup:
@@ -32,15 +32,15 @@ jobs:
           password: ${{ secrets.DOCKERHUB_DEPLOY_TOKEN }}
 
       - name: API 서버 Docker 이미지 생성
-        run: docker build -t monster-server -f ./Dockerfile .
+        run: docker build -t monster-server-prod -f ./Dockerfile .
 
       - name: Docker 이미지에 Tag 붙이기
         run: |
-          docker tag monster-server ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server:latest
+          docker tag monster-server-prod ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server-prod:latest
 
       - name: Docker Hub에 Docker 이미지 Push하기
         run: |
-          docker push ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server:latest
+          docker push ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server-prod:latest
   deploy:
     needs: setup
     runs-on:
@@ -53,18 +53,18 @@ jobs:
 
       - name: Stop existing container and pull latest image
         run: |
-          if sudo docker inspect monster-server &>/dev/null; then
-            sudo docker stop monster-server || true
-            sudo docker rm -f monster-server || true
+          if sudo docker inspect monster-server-prod &>/dev/null; then
+            sudo docker stop monster-server-prod || true
+            sudo docker rm -f monster-server-prod || true
             sudo docker image prune -af || true
           fi
-          sudo docker pull ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server:latest
+          sudo docker pull ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server-prod:latest
 
       - name: Run container
         run: |
           sudo docker run \
-            --name monster-server \
+            --name monster-server-prod \
             --restart unless-stopped \
             -p 8080:8080 \
-            -e PROFILE=dev \
-            -d ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server:latest
+            -e PROFILE=prod \
+            -d ${{ secrets.DOCKERHUB_DEPLOY_USERNAME }}/monster-server-prod:latest
